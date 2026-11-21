@@ -127,14 +127,14 @@ $isEdit = !empty($work['id']);
     var info = document.getElementById('pfLinkInfo');
     var file = document.getElementById('mediaFile');
     var copy = {
-        website: { link: 'Website URL *', linkHint: '"View project" opens this link.', file: 'Website screenshot', fileHint: 'Full-page screenshot works best (it scrolls on hover).',
+        website: { link: 'Website URL *', linkHint: '"View project" opens this link.', file: 'Website screenshot (optional)', fileHint: 'Leave empty to show the website automatically from the URL. Or upload a full-page screenshot (it scrolls on hover).',
                    desc: 'One line on what was built', descHint: 'e.g. Appointment booking, treatments pages.' },
         seo:     { link: 'Project link (optional)', linkHint: 'Optional — client website or Google Maps profile.', file: 'Search Console / GMB screenshot', fileHint: 'Graph or insights screenshot.',
                    stats: 'Results (e.g. +120% / Organic traffic, +45 / GMB calls per month)', s1: 'Organic traffic', s2: 'GMB calls / month' },
         reel:    { link: 'Instagram / YouTube / Facebook link', linkHint: 'Paste the reel/video link. Clicking the card opens it on that platform.', file: 'Video file (MP4) — optional',
                    fileHint: 'Upload the MP4 for guaranteed autoplay + loop (needed for Instagram — Instagram does not allow autoplay embeds). YouTube, Facebook & Vimeo links autoplay without a file.',
                    desc: 'Client · Service', descHint: 'e.g. IALiGN Dental · Shoot + edit', stats: 'Views & reach (optional)', s1: 'Views', s2: 'Reach' },
-        gallery: { link: 'Link (optional)', linkHint: 'If set, clicking the card opens this link. If empty, the image opens full screen.', file: 'Image / PDF *', fileHint: 'JPG, PNG, WebP or PDF.',
+        gallery: { link: 'Link (optional)', linkHint: 'If set, clicking the card opens this link. An Instagram post link alone also works — the post is shown on the card. If empty, the image opens full screen.', file: 'Image / PDF', fileHint: 'JPG, PNG, WebP or PDF. Optional if you added an Instagram / YouTube / Facebook link.',
                    desc: 'Subtitle', descHint: 'e.g. Social media post, Hiring ad – Field sales, Festival greeting.' }
     };
     function layout() { var o = type.options[type.selectedIndex]; return (o && o.dataset.layout) || 'gallery'; }

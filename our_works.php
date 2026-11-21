@@ -85,6 +85,12 @@ function render_website_card(array $item, string $base, bool $hidden): void
                     <img src="<?= pf_e($img) ?>" alt="<?= pf_e($title) ?> website" loading="lazy">
                 <?php elseif ($img && pf_file_kind($img) === 'video'): ?>
                     <video data-src="<?= pf_e($img) ?>" muted loop playsinline preload="none" class="pf-autoplay"></video>
+                <?php elseif ($link !== ''): ?>
+                    <?php /* No screenshot uploaded: show an automatic live screenshot of the website. */ ?>
+                    <img src="https://s.wordpress.com/mshots/v1/<?= rawurlencode($link) ?>?w=1200&amp;h=1800"
+                         alt="<?= pf_e($title) ?> website" loading="lazy" referrerpolicy="no-referrer"
+                         onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+                    <span class="pf-placeholder" hidden><?= pf_e($domain) ?></span>
                 <?php else: ?>
                     <span class="pf-placeholder"><?= pf_e($domain) ?></span>
                 <?php endif; ?>
@@ -184,6 +190,7 @@ function render_gallery_card(array $item, string $base, bool $hidden, int $index
     $file = pf_upload_url($item, $base);
     $kind = $file ? pf_file_kind($file) : '';
     $link = pf_safe_url($item['media_link'] ?? '');
+    $embed = $kind === '' ? pf_video_info($link) : ['platform' => '', 'embed' => ''];
     $title = pf_title($item, $cat['type']);
     $sub = trim((string) ($item['description'] ?? ''));
     $tones = ['dark', 'cream', 'green', 'sand', 'cream', 'dark', 'sand', 'green'];
@@ -206,6 +213,10 @@ function render_gallery_card(array $item, string $base, bool $hidden, int $index
                 <video data-src="<?= pf_e($file) ?>" muted loop playsinline preload="none" class="pf-autoplay"></video>
             <?php elseif ($kind === 'pdf'): ?>
                 <span class="pf-placeholder pf-placeholder--pdf">PDF<br><small>Tap to view</small></span>
+            <?php elseif ($embed['embed'] !== ''): ?>
+                <?php /* No file uploaded: show the Instagram / YouTube / Facebook post itself from the link. */ ?>
+                <iframe data-src="<?= pf_e($embed['embed']) ?>" title="<?= pf_e($title) ?>" class="pf-embed pf-embed--<?= pf_e($embed['platform']) ?>"
+                        loading="lazy" scrolling="no" frameborder="0" tabindex="-1"></iframe>
             <?php else: ?>
                 <span class="pf-placeholder"><?= pf_e($cat['type']) ?></span>
             <?php endif; ?>

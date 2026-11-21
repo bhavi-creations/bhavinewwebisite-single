@@ -245,6 +245,7 @@ body.our-works-body { background: var(--pf-bg) !important; }
     transition: object-position 3s ease;
 }
 .pf-web:hover .pf-web__shot img { object-position: bottom; }
+.pf-web__shot [hidden] { display: none; }
 .pf-web__body { padding: 20px 18px 22px; display: flex; flex-direction: column; flex: 1; }
 .pf-web__body h3 { font-size: 18px; font-weight: 600; color: var(--pf-ink); }
 .pf-web__body p { margin-top: 8px !important; color: var(--pf-muted); font-size: 13.5px; line-height: 1.55; }
@@ -418,6 +419,18 @@ a.pf-poster:hover { transform: translateY(-4px); box-shadow: 0 16px 30px rgba(0,
     transition: transform .5s;
 }
 .pf-poster[style*="contain"] .pf-poster__media { padding: 14px 14px 64px; }
+/* Link-only poster (Instagram post etc.): show the post, click opens the link. */
+.pf-poster__media iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #fff;
+    pointer-events: none;
+}
+.pf-poster[style] .pf-poster__media:has(iframe) { padding: 0; }
+.pf-poster__media .pf-embed--instagram { top: -54px; height: calc(100% + 54px + 160px); }
 a.pf-poster:hover .pf-poster__media img { transform: scale(1.04); }
 .pf-placeholder--pdf { font: 700 22px/1.2 var(--pf-head); }
 .pf-placeholder--pdf small { font: 500 11px var(--pf-body); }
