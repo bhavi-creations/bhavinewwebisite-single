@@ -148,7 +148,11 @@ $isEdit = !empty($work['id']);
         set('mediaFileLabel', c.file); set('mediaFileHint', c.fileHint);
         set('descLabel', c.desc); set('descHint', c.descHint); set('statsTitle', c.stats);
         ['stat1Label', 'stat2Label'].forEach(function (id, i) { document.getElementById(id).placeholder = (i ? c.s2 : c.s1) || ''; });
-        link.required = l === 'website';
+        link.required = type.value === 'Website'; // Customised Software: link optional
+        if (l === 'website' && !link.required) {
+            set('mediaLinkLabel', 'Software / demo link (optional)');
+            set('mediaLinkHint', 'Optional — if set, "View project" opens it. Upload a screenshot of the software below.');
+        }
         detect();
     }
     function detect() {

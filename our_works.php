@@ -73,8 +73,9 @@ function render_website_card(array $item, string $base, bool $hidden): void
 {
     $link = pf_safe_url($item['media_link'] ?? '');
     $img = pf_upload_url($item, $base);
-    $domain = $link !== '' ? pf_domain($link) : 'website';
-    $title = pf_title($item, 'Website project');
+    $isSoftware = strcasecmp(trim((string) ($item['media_type'] ?? '')), 'Customised Software') === 0;
+    $domain = $link !== '' ? pf_domain($link) : ($isSoftware ? 'software' : 'website');
+    $title = pf_title($item, $isSoftware ? 'Software project' : 'Website project');
     $tags = pf_tags($item);
     ?>
     <article class="pf-card pf-web<?= $hidden ? ' is-extra' : '' ?>">
@@ -252,6 +253,16 @@ include __DIR__ . '/header.php';
 
     <!-- ============ FILTER BAR (every service, even ones with no work yet) ============ -->
     <div class="pf-filter-wrap">
+        <!-- Mobile: services as a dropdown -->
+        <label class="pf-filter-select">
+            <span class="pf-filter-select__label">Select service</span>
+            <select id="pfFilterSelect" aria-label="Select service">
+                <option value="all">All Work (<?= array_sum(array_map('count', $grouped)) ?>)</option>
+                <?php foreach ($grouped as $key => $items): ?>
+                    <option value="<?= pf_e($key) ?>"><?= pf_e($categories[$key]['tab']) ?> (<?= count($items) ?>)</option>
+                <?php endforeach; ?>
+            </select>
+        </label>
         <div class="pf-filter" role="navigation" aria-label="Filter portfolio">
             <button type="button" class="is-active" data-filter="all">All Work <span class="pf-count"><?= array_sum(array_map('count', $grouped)) ?></span></button>
             <?php foreach ($grouped as $key => $items): ?>
@@ -388,9 +399,11 @@ include __DIR__ . '/header.php';
     /* ---- Filter tabs (All Work / Websites / SEO / ...) ---- */
     var buttons = [].slice.call(page.querySelectorAll('[data-filter]'));
     var sections = [].slice.call(page.querySelectorAll('.pf-section'));
+    var select = document.getElementById('pfFilterSelect');
     function applyFilter(key, scroll) {
         if (key !== 'all' && !document.getElementById(key)) key = 'all';
         buttons.forEach(function (b) { b.classList.toggle('is-active', b.dataset.filter === key); });
+        if (select) select.value = key;
         sections.forEach(function (s) {
             var match = key === 'all' || s.dataset.section === key;
             s.hidden = !match;
@@ -403,13 +416,14 @@ include __DIR__ . '/header.php';
         }
         refreshMedia();
     }
+    function pick(key) {
+        history.replaceState(null, '', key === 'all' ? location.pathname + location.search : '#' + key);
+        applyFilter(key, true);
+    }
     buttons.forEach(function (b) {
-        b.addEventListener('click', function () {
-            var key = b.dataset.filter;
-            history.replaceState(null, '', key === 'all' ? location.pathname + location.search : '#' + key);
-            applyFilter(key, true);
-        });
+        b.addEventListener('click', function () { pick(b.dataset.filter); });
     });
+    if (select) select.addEventListener('change', function () { pick(select.value); });
     if (location.hash.length > 1) applyFilter(location.hash.slice(1), false);
     window.addEventListener('hashchange', function () { applyFilter(location.hash.slice(1) || 'all', false); });
 
