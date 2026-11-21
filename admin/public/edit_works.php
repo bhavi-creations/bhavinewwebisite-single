@@ -15,7 +15,7 @@ if (!$work) die('❌ Work not found.');
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    [$ok, $message] = portfolio_save_work($conn, $work, 'uploads/staff/');
+    [$ok, $message] = portfolio_save_work($conn, $work);
     if ($ok) {
         echo "<script>alert(" . json_encode('✅ ' . $message) . "); window.location.href='view_works.php';</script>";
         exit;

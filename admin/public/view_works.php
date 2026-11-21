@@ -88,9 +88,9 @@ require_once '../../portfolio_lib.php';
                         } else {
                             while ($row = $result->fetch_assoc()) {
                                 $id = (int) $row['id'];
-                                $file = basename((string) $row['file_path']);
+                                $file = (string) $row['file_path'];
                                 $kind = pf_file_kind($file);
-                                $path = 'uploads/staff/' . rawurlencode($file);
+                                $path = pf_work_path($file, true);
                                 $link = pf_safe_url($row['media_link'] ?? '');
                                 $video = pf_video_info($link);
                                 $title = trim((string) ($row['title'] ?? '')) ?: ($link && !$video['platform'] ? pf_domain($link) : '(no title)');

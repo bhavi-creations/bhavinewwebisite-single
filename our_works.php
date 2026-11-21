@@ -43,14 +43,14 @@ $heroStats = array_filter([
     ['value' => $count(['posters', 'logo', 'visitingcards', 'pamphlets', 'brochures', 'hoardings']), 'suffix' => '+', 'label' => 'Creatives designed'],
 ], static fn($s) => $s['value'] > 0);
 
-$uploadBase = 'admin/public/uploads/staff/';
+$uploadBase = 'admin/public/'; // + uploads/staff/<image> or upload/video/<video>
 
 /** Public URL of an uploaded file, or '' when missing. */
 function pf_upload_url(array $item, string $base): string
 {
-    $file = basename(trim((string) ($item['file_path'] ?? '')));
-    if ($file === '' || !is_file(__DIR__ . '/' . $base . $file)) return '';
-    return $base . rawurlencode($file);
+    $rel = pf_work_path((string) ($item['file_path'] ?? ''));
+    if ($rel === '' || !is_file(__DIR__ . '/' . $base . $rel)) return '';
+    return $base . pf_work_path((string) $item['file_path'], true);
 }
 
 function pf_title(array $item, string $fallback): string

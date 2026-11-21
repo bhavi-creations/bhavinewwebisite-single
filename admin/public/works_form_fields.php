@@ -55,7 +55,7 @@ $isEdit = !empty($work['id']);
         <?php if ($isEdit && !empty($work['file_path'])): ?>
             <div class="mb-2">
                 <?php
-                $path = 'uploads/staff/' . rawurlencode(basename($work['file_path']));
+                $path = pf_work_path((string) $work['file_path'], true);
                 $kind = pf_file_kind($work['file_path']);
                 if ($kind === 'image') echo "<img src='$path' style='max-width:200px;max-height:200px;border:1px solid #ddd;padding:4px;border-radius:6px'>";
                 elseif ($kind === 'video') echo "<video src='$path' muted loop autoplay playsinline style='max-width:160px;max-height:240px;border-radius:6px'></video>";

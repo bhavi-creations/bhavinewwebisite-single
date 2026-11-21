@@ -186,12 +186,30 @@ function pf_allowed_ext(): array
     return ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg', 'avif', 'mp4', 'mov', 'm4v', 'webm', 'pdf'];
 }
 
+/** Upload folders, relative to admin/public/. Videos get their own folder. */
+const PF_IMAGE_DIR = 'uploads/staff/';
+const PF_VIDEO_DIR = 'upload/video/';
+
+/**
+ * Path of a stored work file relative to admin/public/ (encoded for URLs when $url is true).
+ * New videos are stored as "upload/video/<name>"; older files are a bare name in uploads/staff/.
+ */
+function pf_work_path(string $filePath, bool $url = false): string
+{
+    $filePath = trim($filePath);
+    if ($filePath === '') return '';
+    $dir = strpos($filePath, PF_VIDEO_DIR) === 0 ? PF_VIDEO_DIR : PF_IMAGE_DIR;
+    $name = basename($filePath);
+    return $dir . ($url ? rawurlencode($name) : $name);
+}
+
 /**
  * Insert (no $existing) or update a work from $_POST / $_FILES['media_file'].
- * $uploadDir is relative to the calling admin script, e.g. 'uploads/staff/'.
+ * $baseDir is the path from the calling script to admin/public/ ('' when called from there).
+ * Images/PDFs go to uploads/staff/, videos to upload/video/.
  * Returns [bool ok, string message].
  */
-function portfolio_save_work(mysqli $conn, ?array $existing, string $uploadDir): array
+function portfolio_save_work(mysqli $conn, ?array $existing, string $baseDir = ''): array
 {
     $text = static fn(string $k, int $max = 255) => mb_substr(trim((string) ($_POST[$k] ?? '')), 0, $max);
 
@@ -230,10 +248,13 @@ function portfolio_save_work(mysqli $conn, ?array $existing, string $uploadDir):
         }
         $ext = strtolower(pathinfo($upload['name'], PATHINFO_EXTENSION));
         if (!in_array($ext, pf_allowed_ext(), true)) return [false, 'Invalid file type. Allowed: ' . implode(', ', pf_allowed_ext())];
-        if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+        $isVideo = pf_file_kind('x.' . $ext) === 'video';
+        $dir = $isVideo ? PF_VIDEO_DIR : PF_IMAGE_DIR;
+        if (!is_dir($baseDir . $dir)) mkdir($baseDir . $dir, 0755, true);
         $name = uniqid('work_') . '.' . $ext;
-        if (!move_uploaded_file($upload['tmp_name'], $uploadDir . $name)) return [false, 'Could not save the uploaded file.'];
-        $newFile = $name;
+        if (!move_uploaded_file($upload['tmp_name'], $baseDir . $dir . $name)) return [false, 'Could not save the uploaded file.'];
+        // Videos keep their folder in the DB value; images stay a bare file name (as before).
+        $newFile = $isVideo ? PF_VIDEO_DIR . $name : $name;
         $deleteOld = true;
     }
 
@@ -257,7 +278,7 @@ function portfolio_save_work(mysqli $conn, ?array $existing, string $uploadDir):
     if (!$stmt->execute()) return [false, 'Database error: ' . $stmt->error];
 
     if ($deleteOld && $oldFile !== '' && $oldFile !== $newFile) {
-        $oldPath = $uploadDir . basename($oldFile);
+        $oldPath = $baseDir . pf_work_path($oldFile);
         if (is_file($oldPath)) @unlink($oldPath);
     }
     return [true, $existing ? 'Work updated successfully.' : 'Work added successfully.'];

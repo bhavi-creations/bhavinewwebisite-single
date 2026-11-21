@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 portfolio_ensure_schema($conn);
-[$ok, $message] = portfolio_save_work($conn, null, 'uploads/staff/');
+[$ok, $message] = portfolio_save_work($conn, null);
 $conn->close();
 
 $msg = json_encode(($ok ? '✅ ' : '❌ ') . $message);

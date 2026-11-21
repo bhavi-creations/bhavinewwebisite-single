@@ -1,5 +1,6 @@
 <?php
 include '../../db.connection/db_connection.php';
+require_once '../../portfolio_lib.php';
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
@@ -13,7 +14,7 @@ if (isset($_GET['id'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $file_path = 'uploads/staff/' . basename((string) $row['file_path']);
+        $file_path = pf_work_path((string) $row['file_path']);
 
         // Delete the file from the server (link-only works have no file)
         if ($row['file_path'] !== '' && is_file($file_path)) {
