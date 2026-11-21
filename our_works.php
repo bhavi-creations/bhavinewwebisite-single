@@ -191,7 +191,7 @@ function render_gallery_card(array $item, string $base, bool $hidden, int $index
     $kind = $file ? pf_file_kind($file) : '';
     $link = pf_safe_url($item['media_link'] ?? '');
     $embed = $kind === '' ? pf_video_info($link) : ['platform' => '', 'embed' => ''];
-    $title = pf_title($item, $cat['type']);
+    $title = pf_title($item, $cat['tab']);
     $sub = trim((string) ($item['description'] ?? ''));
     $tones = ['dark', 'cream', 'green', 'sand', 'cream', 'dark', 'sand', 'green'];
     $tone = $tones[$index % count($tones)];
@@ -218,7 +218,7 @@ function render_gallery_card(array $item, string $base, bool $hidden, int $index
                 <iframe data-src="<?= pf_e($embed['embed']) ?>" title="<?= pf_e($title) ?>" class="pf-embed pf-embed--<?= pf_e($embed['platform']) ?>"
                         loading="lazy" scrolling="no" frameborder="0" tabindex="-1"></iframe>
             <?php else: ?>
-                <span class="pf-placeholder"><?= pf_e($cat['type']) ?></span>
+                <span class="pf-placeholder"><?= pf_e($cat['tab']) ?></span>
             <?php endif; ?>
         </div>
         <div class="pf-poster__cap">
