@@ -138,6 +138,8 @@ function render_seo_card(array $item, string $base, bool $hidden, bool $featured
         <?php endif; ?>
         <?php if ($img && pf_file_kind($img) === 'image'): ?>
             <a class="pf-seo__shot" href="<?= pf_e($img) ?>" data-lightbox><img src="<?= pf_e($img) ?>" alt="Ranking report" loading="lazy"></a>
+        <?php elseif ($img && pf_file_kind($img) === 'video'): ?>
+            <div class="pf-seo__shot"><video data-src="<?= pf_e($img) ?>" muted loop playsinline preload="none" class="pf-autoplay"></video></div>
         <?php endif; ?>
         <?php if ($link !== ''): ?><a class="pf-link" href="<?= pf_e($link) ?>" target="_blank" rel="noopener">View project <span aria-hidden="true">→</span></a><?php endif; ?>
     </article>

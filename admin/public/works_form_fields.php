@@ -67,8 +67,9 @@ $isEdit = !empty($work['id']);
                 </div>
             </div>
         <?php endif; ?>
-        <input type="file" class="form-control-file" name="media_file" id="mediaFile" accept="image/*,video/mp4,video/webm,video/quicktime,.pdf">
+        <input type="file" class="form-control-file" name="media_file" id="mediaFile" accept="image/*,video/*,.mp4,.mov,.m4v,.webm,.pdf">
         <div class="hint" id="mediaFileHint">Image, video (MP4/WebM) or PDF.</div>
+        <div class="hint">Max file size: <?= htmlspecialchars(ini_get('upload_max_filesize')) ?>. Videos play muted on loop on the website.</div>
     </div>
 
     <!-- Website + gallery + reel: tags & description -->
@@ -127,14 +128,14 @@ $isEdit = !empty($work['id']);
     var info = document.getElementById('pfLinkInfo');
     var file = document.getElementById('mediaFile');
     var copy = {
-        website: { link: 'Website URL *', linkHint: '"View project" opens this link.', file: 'Website screenshot (optional)', fileHint: 'Leave empty to show the website automatically from the URL. Or upload a full-page screenshot (it scrolls on hover).',
+        website: { link: 'Website URL *', linkHint: '"View project" opens this link.', file: 'Screenshot / video (optional)', fileHint: 'Image or video (MP4). For Website: leave empty to show the site automatically from the URL, or upload a full-page screenshot (it scrolls on hover).',
                    desc: 'One line on what was built', descHint: 'e.g. Appointment booking, treatments pages.' },
-        seo:     { link: 'Project link (optional)', linkHint: 'Optional — client website or Google Maps profile.', file: 'Search Console / GMB screenshot', fileHint: 'Graph or insights screenshot.',
+        seo:     { link: 'Project link (optional)', linkHint: 'Optional — client website or Google Maps profile.', file: 'Screenshot / video', fileHint: 'Search Console / GMB screenshot, or a screen-recording video (MP4).',
                    stats: 'Results (e.g. +120% / Organic traffic, +45 / GMB calls per month)', s1: 'Organic traffic', s2: 'GMB calls / month' },
         reel:    { link: 'Instagram / YouTube / Facebook link', linkHint: 'Paste the reel/video link. Clicking the card opens it on that platform.', file: 'Video file (MP4) — optional',
                    fileHint: 'Upload the MP4 for guaranteed autoplay + loop (needed for Instagram — Instagram does not allow autoplay embeds). YouTube, Facebook & Vimeo links autoplay without a file.',
                    desc: 'Client · Service', descHint: 'e.g. IALiGN Dental · Shoot + edit', stats: 'Views & reach (optional)', s1: 'Views', s2: 'Reach' },
-        gallery: { link: 'Link (optional)', linkHint: 'If set, clicking the card opens this link. An Instagram post link alone also works — the post is shown on the card. If empty, the image opens full screen.', file: 'Image / PDF', fileHint: 'JPG, PNG, WebP or PDF. Optional if you added an Instagram / YouTube / Facebook link.',
+        gallery: { link: 'Link (optional)', linkHint: 'If set, clicking the card opens this link. An Instagram post link alone also works — the post is shown on the card. If empty, the image opens full screen.', file: 'Image / Video / PDF', fileHint: 'JPG, PNG, WebP, MP4 video or PDF. Optional if you added an Instagram / YouTube / Facebook link.',
                    desc: 'Subtitle', descHint: 'e.g. Social media post, Hiring ad – Field sales, Festival greeting.' }
     };
     function layout() { var o = type.options[type.selectedIndex]; return (o && o.dataset.layout) || 'gallery'; }
@@ -180,6 +181,18 @@ $isEdit = !empty($work['id']);
         if (!hasFile && !link.value.trim()) {
             e.preventDefault();
             alert('Please upload a file or add a link.');
+            return;
+        }
+        // Stop before uploading a file bigger than the server allows.
+        var maxBytes = <?= (function () {
+            $v = trim((string) ini_get('upload_max_filesize'));
+            $n = (float) $v;
+            $u = strtolower(substr($v, -1));
+            return (int) ($u === 'g' ? $n * 1073741824 : ($u === 'm' ? $n * 1048576 : ($u === 'k' ? $n * 1024 : $n)));
+        })() ?>;
+        if (file.files.length && maxBytes > 0 && file.files[0].size > maxBytes) {
+            e.preventDefault();
+            alert('This file is ' + (file.files[0].size / 1048576).toFixed(1) + ' MB. The maximum is <?= htmlspecialchars(ini_get('upload_max_filesize')) ?>. Please compress the video and try again.');
         }
     });
 })();

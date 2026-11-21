@@ -287,7 +287,7 @@ body.our-works-body { background: var(--pf-bg) !important; }
     border-radius: 10px;
     overflow: hidden;
 }
-.pf-seo__shot img { display: block; width: 100%; height: 140px; object-fit: cover; object-position: top; }
+.pf-seo__shot img, .pf-seo__shot video { display: block; width: 100%; height: 140px; object-fit: cover; object-position: top; }
 .pf-seo--dark { background: var(--pf-blue-800); border-color: var(--pf-blue-800); color: #fff; }
 .pf-seo--dark .pf-seo__kw,
 .pf-seo--dark .pf-seo__stats small,
