@@ -32,6 +32,11 @@ if ($res === false) {
 }
 $conn->close();
 
+// Sections marked 'hidden' => true in portfolio_lib.php are not shown on the website (data is kept).
+foreach ($categories as $key => $cat) {
+    if (!empty($cat['hidden'])) unset($grouped[$key], $categories[$key]);
+}
+
 $visible = array_filter($grouped, static fn($items) => count($items) > 0);
 
 /* ---------- Hero numbers (live counts from the database) ---------- */

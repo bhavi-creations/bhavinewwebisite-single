@@ -29,7 +29,7 @@ $isEdit = !empty($work['id']);
                 foreach (portfolio_media_types() as $type => $cat) {
                     $sel = strcasecmp($current, $type) === 0 ? ' selected' : '';
                     if ($sel) $known = true;
-                    echo '<option value="' . htmlspecialchars($type) . '" data-layout="' . $cat['layout'] . '"' . $sel . '>' . htmlspecialchars($cat['tab']) . '</option>';
+                    echo '<option value="' . htmlspecialchars($type) . '" data-layout="' . $cat['layout'] . '"' . $sel . '>' . htmlspecialchars($cat['tab']) . (empty($cat['hidden']) ? '' : ' (hidden on website)') . '</option>';
                 }
                 if ($current !== '' && !$known) echo '<option value="' . htmlspecialchars($current) . '" data-layout="gallery" selected>' . htmlspecialchars($current) . '</option>';
                 ?>
