@@ -141,8 +141,23 @@ $wa = 'https://api.whatsapp.com/send?phone=' . $CONTACT['phone_raw'];
 <section class="manifesto" id="manifesto" data-scene="manifesto">
   <div class="wrap">
     <p class="eyebrow">( The question of the decade )</p>
-    <p class="mf-text" data-words>What happens when everyone in the world gets a <em>Genie?</em> 8 billion people. 8 billion genies. Every wish, granted. The wish gets easy — but <em>vision</em> gets rare. Bhavi Creations helps brands choose the right story, the right moment, and the right way to be <span class="gold-text">remembered.</span></p>
-    <a href="#about" class="link-arrow" data-reveal>Find yours <i class="bi bi-arrow-right"></i></a>
+    <p class="mf-text" data-words>What happens when everyone in the world gets a <em>Genie?</em></p>
+    <p class="mf-sub" data-reveal>8 billion people. 8 billion genies. Every wish, granted.</p>
+
+    <p class="mf-easy" data-reveal>The wish gets easy</p>
+    <span class="mf-pill" data-reveal>A vision no one else has</span>
+
+    <div class="mf-answer glass" data-reveal>
+      <div class="mf-top"><span>( The answer )</span><span>Wishes are infinite. Vision isn't.</span></div>
+      <div class="mf-mid">
+        <p>The vision gets</p>
+        <h3 class="mf-rare gold-text">Rare</h3>
+      </div>
+      <div class="mf-bot">
+        <p>Bhavi Creations helps brands choose the right story, the right moment, and the right way to be remembered.</p>
+        <a href="#about" class="link-arrow">Find yours <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
   </div>
 </section>
 
