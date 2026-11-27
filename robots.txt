@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login.php
+Disallow: /logout.php
+Disallow: /api/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /phpmyadmin/
+Disallow: /vendor/
+
+Sitemap: https://www.bhavicreations.com/sitemap.xml

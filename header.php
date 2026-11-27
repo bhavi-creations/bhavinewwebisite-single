@@ -102,6 +102,224 @@ header('Cache-Control: no-cache, must-revalidate');
 @media(max-width:767px){.bc-white-logo-svg{width:145px}.footer_new_section_logo .bc-white-logo-svg{width:170px}}
 @media(max-width:390px){.bc-white-logo-svg{width:128px}.footer_new_section_logo .bc-white-logo-svg{width:155px}}
 </style>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "https://www.bhavicreations.com/#organization",
+      "name": "Bhavi Creations Private Limited",
+      "alternateName": [
+        "Bhavi Creations",
+        "Bhavi Creations Pvt Ltd"
+      ],
+      "url": "https://www.bhavicreations.com/",
+      "description": "Bhavi Creations Private Limited is a branding, creative and digital marketing agency providing digital marketing, SEO, paid advertising, graphic designing, video editing, website development, customised software development, mobile application development and offline advertising services.",
+      "slogan": "We Build Brands That People Remember.",
+      "telephone": "+91-9642343434",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Plot No 28, RTO Office Road, Behind Lazza Ice Cream, Ranga Rao Nagar",
+        "addressLocality": "Kakinada",
+        "addressRegion": "Andhra Pradesh",
+        "postalCode": "533003",
+        "addressCountry": "IN"
+      },
+      "employee": {
+        "@type": "Person",
+        "name": "Ch. Naga Phaneendra",
+        "jobTitle": "Chief Executive Officer"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-9642343434",
+        "contactType": "sales",
+        "availableLanguage": [
+          "English",
+          "Telugu"
+        ]
+      },
+      "knowsAbout": [
+        "Digital Marketing",
+        "Brand Strategy",
+        "Social Media Marketing",
+        "Search Engine Optimization",
+        "Google Ads",
+        "Meta Ads",
+        "Lead Generation",
+        "Graphic Designing",
+        "Video Production",
+        "Website Development",
+        "UI UX Design",
+        "Custom Software Development",
+        "Mobile Application Development",
+        "Google Business Profile Optimization",
+        "Offline Advertising"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Bhavi Creations Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Digital Marketing",
+              "description": "Digital marketing strategies for brand awareness, customer engagement and business growth."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Search Engine Optimization",
+              "description": "Technical SEO, on-page SEO, local SEO and organic search visibility optimization."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Paid Advertising and Lead Generation",
+              "description": "Google Ads, Meta Ads and performance marketing campaigns."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Social Media Management",
+              "description": "Social media content planning, creative campaigns and account management."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Graphic Designing",
+              "description": "Professional posters, logos, brand creatives and visual identity design."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Video Editing and Production",
+              "description": "Reels, promotional videos, short-form content and professional video editing."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Website Development",
+              "description": "Responsive business websites, e-commerce websites and custom web development."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Customized Software Development",
+              "description": "Custom CRM, billing, business management and workflow automation software."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Mobile Application Development",
+              "description": "Customized mobile application development for business requirements."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Branding and Visual Identity",
+              "description": "Brand identity, logo design and creative brand communication."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Google Business Profile Optimization",
+              "description": "Google Business Profile management and local search optimization."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Offline Advertising",
+              "description": "Outdoor advertising, hoardings, banners and print promotions."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.bhavicreations.com/#website",
+      "url": "https://www.bhavicreations.com/",
+      "name": "Bhavi Creations",
+      "alternateName": "Bhavi Creations Private Limited",
+      "publisher": {
+        "@id": "https://www.bhavicreations.com/#organization"
+      },
+      "inLanguage": "en-IN"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.bhavicreations.com/#webpage",
+      "url": "https://www.bhavicreations.com/",
+      "name": "Bhavi Creations | Branding, Digital Marketing and Creative Agency",
+      "description": "Bhavi Creations provides branding, digital marketing, SEO, graphic designing, video production, website development and custom technology solutions.",
+      "isPartOf": {
+        "@id": "https://www.bhavicreations.com/#website"
+      },
+      "about": {
+        "@id": "https://www.bhavicreations.com/#organization"
+      },
+      "inLanguage": "en-IN"
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://www.bhavicreations.com/our_works.php#webpage",
+      "url": "https://www.bhavicreations.com/our_works.php",
+      "name": "Our Portfolio | Bhavi Creations",
+      "description": "Explore website development, custom software, SEO, video editing, graphic design and branding projects by Bhavi Creations.",
+      "isPartOf": {
+        "@id": "https://www.bhavicreations.com/#website"
+      },
+      "about": {
+        "@id": "https://www.bhavicreations.com/#organization"
+      }
+    }
+  ]
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 
 <body<?= $isWorksPage ? ' class="our-works-body"' : '' ?>>
